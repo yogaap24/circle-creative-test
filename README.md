@@ -46,7 +46,7 @@
 4. **Run Migrations**
    - Run database migrations to create the necessary tables:
      ```bash
-     php artisan migrate
+     php artisan migrate:fresh --seed
      ```
 
 5. **Install Laravel Breeze**
@@ -66,6 +66,12 @@
    - Start the Laravel development server:
      ```bash
      php artisan serve
+     ```
+
+8. **Run Queue Worker**
+   - Start the queue worker to process queued jobs:
+     ```bash
+     php artisan queue:work
      ```
 
 ## Additional Information
