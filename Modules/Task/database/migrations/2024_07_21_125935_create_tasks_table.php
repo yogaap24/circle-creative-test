@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->foreignId('creator_id')->constrained('users');
+            $table->boolean('is_read')->default(false);
             $table->nestedSet();
             $table->timestamps();
         });

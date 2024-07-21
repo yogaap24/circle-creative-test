@@ -23,7 +23,6 @@ class TaskServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->registerPolicies();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'database/migrations'));
     }
 
@@ -119,10 +118,5 @@ class TaskServiceProvider extends ServiceProvider
         }
 
         return $paths;
-    }
-
-    protected function registerPolicies()
-    {
-        // $this->app['auth']->policy(Task::class, TaskPolicy::class);
     }
 }

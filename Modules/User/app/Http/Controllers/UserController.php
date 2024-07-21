@@ -5,7 +5,6 @@ namespace Modules\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Modules\User\Models\User;
 
 class UserController extends Controller
@@ -15,12 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role !== 'admin') {
-            $users = User::where('id', Auth::id())->get();
-        } else {
-            $users = User::all();
-        }
-
+        $users = User::all();
         return view('user::index', compact('users'));
     }
 

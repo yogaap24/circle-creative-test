@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 use Modules\Task\Models\Task;
 
 class TaskAssigned extends Notification implements ShouldQueue
@@ -37,8 +38,9 @@ class TaskAssigned extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
+        Log::info('Sending email to: ' . $notifiable->email);
         return (new MailMessage)
-                    ->line('You have been assigned a new task: ' . $this->task->name)
+                    ->line('You have been assigned a new task: ' . $this->task->title)
                     ->action('View Task', url('/tasks/' . $this->task->id))
                     ->line('Thank you for using our application!');
     }
@@ -52,7 +54,7 @@ class TaskAssigned extends Notification implements ShouldQueue
     {
         return [
             'task_id' => $this->task->id,
-            'task_name' => $this->task->name,
+            'task_title' => $this->task->title,
         ];
     }
 }

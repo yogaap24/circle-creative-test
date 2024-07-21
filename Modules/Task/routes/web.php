@@ -16,4 +16,5 @@ use Modules\Task\Http\Controllers\TaskController;
 
 Route::group([], function () {
     Route::resource('task', TaskController::class)->names('tasks');
+    Route::post('task/read', [TaskController::class, 'markAsRead'])->name('tasks.read_all');
 });

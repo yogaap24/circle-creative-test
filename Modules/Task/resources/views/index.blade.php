@@ -10,9 +10,22 @@
                     class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md font-semibold text-xs text-gray-900 uppercase tracking-widest hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
                     {{ __('Create Task') }}
                 </a>
+            @else
+                <form method="POST" action="{{ route('tasks.read_all') }}">
+                    @csrf
+                    <x-secondary-button type="submit">
+                        {{ __('Read All Task') }}
+                    </x-secondary-button>
+                </form>
             @endif
         </div>
     </x-slot>
+
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -33,7 +46,7 @@
                         <ul>
                             @foreach ($tasks as $task)
                                 <li
-                                    class="flex items-center justify-between p-4 mb-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                                    class="flex items-center justify-between p-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
                                     <div>
                                         <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                             {{ $task->title }}

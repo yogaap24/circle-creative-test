@@ -10,7 +10,7 @@ class Task extends Model
 {
     use NodeTrait;
 
-    protected $fillable = ['title', 'description', 'creator_id'];
+    protected $fillable = ['title', 'description', 'creator_id', 'is_read'];
 
     public function users()
     {
@@ -20,5 +20,14 @@ class Task extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public static function unreadCount($userId)
+    {
+        return Task::where('is_read', false)
+            ->whereHas('users', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->count();
     }
 }
